@@ -5,6 +5,10 @@ const birthMonthEl = document.getElementById("birth-month");
 const birthDayEl = document.getElementById("birth-day");
 const calculateBtn = document.getElementById("btn");
 const resultEl = document.getElementById("age-show");
+const modalEl = document.getElementById("modal");
+const resultModalEl = document.getElementById("age-show-modal");
+const againBtn = document.getElementById("again");
+const formEl = document.querySelector(".age-form");
 
 calculateBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -86,7 +90,19 @@ calculateBtn.addEventListener("click", function (e) {
     const yearMessage = ageYear === 1 ? "Year" : "Years";
     const monthMessage = ageMonth === 1 ? "Month" : "Months";
     const dayMessage = ageDay === 1 ? "Day" : "Days";
-    resultEl.innerHTML = `${ageYear} ${yearMessage}, ${ageMonth} ${monthMessage}, ${ageDay} ${dayMessage}`;
-    resultEl.style.color = "#223c20ff";
+    modalEl.classList.remove("hidden");
+    resultModalEl.innerHTML = `${ageYear} ${yearMessage}, ${ageMonth} ${monthMessage}, ${ageDay} ${dayMessage}`;
+    resultModalEl.style.color = "#2fa127ff";
+    formEl.style.display = "none";
   }
+});
+
+againBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  modalEl.classList.add("hidden");
+  birthYearEl.value = "";
+  birthMonthEl.value = "";
+  birthDayEl.value = "";
+  resultEl.innerHTML = "Your age is : ";
+  formEl.style.display = "block";
 });

@@ -10,6 +10,7 @@
     <h1 class="primary-heading">Calculate Your Age</h1>
     <form action="#" class="age-form">
       <div class="birth-info">
+        <p id="age-show">Your age is :</p>
         <label for="birth-year">Enter your birth year : </label>
         <input
           type="number"
@@ -35,9 +36,12 @@
           required
         />
         <button id="btn">Get your age</button>
-        <p class="text">Your age is : <span id="age-show"></span></p>
       </div>
     </form>
+    <div id="modal" class="hidden">
+      <p class="text-modal">Your age is : <span id="age-show-modal"></span></p>
+      <button id="again">Calculate Again</button>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

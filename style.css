@@ -14,12 +14,13 @@ body {
   font-family: "Pacifico", cursive;
   background-color: #fdebd0;
   color: #3b3b3b;
+  overflow-x: hidden;
 }
 
 .primary-heading {
   text-align: center;
   margin: 20px 0;
-  font-size: 4rem;
+  font-size: 3.8rem;
   color: #ff4d4d;
 }
 
@@ -46,7 +47,8 @@ input {
   background-color: rgba(255, 77, 77, 0.355);
 }
 
-#btn {
+#btn,
+#again {
   font-family: inherit;
   font-size: 2.2rem;
   padding: 1.2rem 2.4rem;
@@ -58,17 +60,49 @@ input {
   transition: all 0.3s ease-in;
 }
 
-#btn:hover {
+#btn:hover,
+#again:hover {
   background-color: #000;
   color: #ff4d4d;
 }
 
-.text {
+#age-show {
   font-size: 2rem;
   line-height: 1.6;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  color: #ff4d4d;
+  padding-inline: 1.6rem;
 }
 
-#age-show {
-  color: #ff4d4d;
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(232, 123, 123, 0.629);
+  backdrop-filter: blur(10px);
+  transform: all 0.3s ease-in;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-modal {
+  font-size: 3rem;
+  text-align: center;
+  color: #000;
+}
+
+#age-show-modal {
+  display: block;
+  text-align: center;
+  font-size: 3.2rem;
+  margin-bottom: 3rem;
 }
