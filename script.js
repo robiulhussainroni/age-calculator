@@ -85,8 +85,12 @@ calculateBtn.addEventListener("click", function (e) {
       currentYear -= 1;
     }
     const ageYear = currentYear - birthYear;
-    const ageMonth = currentMonth - birthMonth;
-    const ageDay = currentDay - birthDay;
+    let ageMonth = currentMonth - birthMonth;
+    let ageDay = currentDay - birthDay;
+    if (ageDay > 30) {
+      ageMonth += 1;
+      ageDay = ageDay - 30;
+    }
     const yearMessage = ageYear === 1 ? "Year" : "Years";
     const monthMessage = ageMonth === 1 ? "Month" : "Months";
     const dayMessage = ageDay === 1 ? "Day" : "Days";
