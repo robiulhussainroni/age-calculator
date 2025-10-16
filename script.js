@@ -15,6 +15,7 @@ calculateBtn.addEventListener("click", function (e) {
   const birthYear = Number(birthYearEl.value);
   const birthMonth = Number(birthMonthEl.value);
   const birthDay = Number(birthDayEl.value);
+
   if (
     birthYear <= 0 ||
     birthMonth <= 0 ||
@@ -23,12 +24,22 @@ calculateBtn.addEventListener("click", function (e) {
     birthDay > 31
   ) {
     resultEl.innerHTML = "Please enter valid values.";
-  } else if (birthYear % 4 === 0 && birthMonth === 2 && birthDay > 29) {
-    resultEl.innerHTML = "February doesn't have more than 29 days.";
-  } else if (birthYear % 4 !== 0 && birthMonth === 2 && birthDay > 28) {
-    resultEl.innerHTML =
-      "February doesn't have more than 28 days (Except Leap Year : 29 days).";
-  } else if (
+    return;
+  }
+
+  if (birthMonth === 2) {
+    const leapYear =
+      (birthYear % 4 === 0 && birthYear % 100 !== 0) || birthYear % 400 === 0;
+    if (leapYear && birthDay > 29) {
+      resultEl.innerHTML = "February doesn't have more than 29 days.";
+      return;
+    } else if (!leapYear && birthDay > 28) {
+      resultEl.innerHTML =
+        "February doesn't have more than 28 days (Except Leap Year : 29 days).";
+      return;
+    }
+  }
+  if (
     (birthMonth === 4 ||
       birthMonth === 6 ||
       birthMonth === 9 ||
@@ -53,44 +64,20 @@ calculateBtn.addEventListener("click", function (e) {
     let currentMonth = today.getMonth() + 1;
     let currentDay = today.getDate();
 
-    if (currentDay < birthDay) {
-      if (
-        currentMonth === 1 ||
-        currentMonth === 3 ||
-        currentMonth === 5 ||
-        currentMonth === 7 ||
-        currentMonth === 8 ||
-        currentMonth === 10 ||
-        currentMonth === 12
-      ) {
-        currentDay += 31;
-        currentMonth -= 1;
-      }
-      if (
-        currentMonth === 4 ||
-        currentMonth === 6 ||
-        currentMonth === 9 ||
-        currentMonth === 11
-      ) {
-        currentDay += 30;
-        currentMonth -= 1;
-      }
-      if (currentMonth === 2) {
-        currentYear % 4 === 0 ? (currentDay += 29) : (currentDay += 28);
-        currentMonth -= 1;
-      }
-    }
-    if (currentMonth < birthMonth) {
-      currentMonth += 12;
-      currentYear -= 1;
-    }
-    const ageYear = currentYear - birthYear;
+    let ageYear = currentYear - birthYear;
     let ageMonth = currentMonth - birthMonth;
     let ageDay = currentDay - birthDay;
-    if (ageDay > 30) {
-      ageMonth += 1;
-      ageDay = ageDay - 30;
+
+    if (ageDay < 0) {
+      ageMonth--;
+      ageDay += new Date(currentYear, currentMonth - 1, 0).getDate();
     }
+
+    if (ageMonth < 0) {
+      ageYear--;
+      ageMonth += 12;
+    }
+
     const yearMessage = ageYear === 1 ? "Year" : "Years";
     const monthMessage = ageMonth === 1 ? "Month" : "Months";
     const dayMessage = ageDay === 1 ? "Day" : "Days";
